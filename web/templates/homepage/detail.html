@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ pid.title }}</title>
+    <link rel="icon" href="{% static 'homepage/img/logo-bds.png' %}" type="image/x-icon" >
+    <link rel="stylesheet" href=" {% static 'homepage/css/style.css'%}">
+    <link rel="stylesheet" href=" {% static 'homepage/css/detail.css'%}">
+    <link rel="stylesheet" href=" {% static 'homepage/css/modal.css' %}">
+    <link rel="stylesheet" href=" {% static 'homepage/fonts/themify-icons/themify-icons.css'%} ">
+</head>
+<body>
+    <div id="main">
+
+        <!--begin header-->
+        <header class="header">
+            <div class="nav">
+                <ul class="nav-list">
+                    <li class="nav-items item-left">Định Giá Nhà Đất</li>
+                </ul>
+                <ul class="nav-list item-right">
+                    <a href="{% url 'register' %}">
+                        <li class="nav-items item-right-1">Đăng ký</li>
+                    </a>
+
+                    <a href="{% url 'login' %}">
+                        <li class="nav-items">Đăng nhập</li>
+                    </a>
+                </ul>
+                
+            </div>
+
+            <div class="header-item">
+                
+                <a href="{% url 'index' %}"><img src="{% static 'homepage/img/logo-bds.png'%}" alt="" class="logo-bds"></a>
+                <div class="header-search">
+                    <div class="frame-search-input">
+                        <input type="text" class="search-input" placeholder="Tìm kiếm sản phẩm tại đây">
+                        <div class="ti-search search-icon"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!--end header-->
+
+        <!--begin container-->
+        <div class="detail-container">
+            <div class="detail-content">
+
+
+                    <div class="img-box">
+                        <div class="img-item">
+                            <img src="{{ pid.image }}" alt="" class="img-position">
+                        </div>
+    
+                        <a href="#">
+                            <div class="ti-angle-right icon-right"></div>
+                        </a>
+                        <a href="#">
+                            <div class="ti-angle-left icon-left"></div>
+                        </a>
+                    </div>
+
+                    <div class="info-box">
+
+                        <div class="title-product">
+                            {{ pid.title }}
+                        </div>
+
+                        <div class="address-product">
+                            <span class="ti-map-alt map-address"></span>
+                            {{ pid.address }}
+                        </div>
+
+                        <hr>
+
+                        <div class="price-product">
+                            <span class="ti-money"></span> 
+                            <p class="price-text">Giá gốc: {{ pid.price }}</p>
+                        </div>
+
+                        <div class="param-product">
+                            <span class="ti-home"></span>
+                            <p class="param-text">Diện tích: {{ pid.area}} m2</p>
+                        </div>
+
+                        <div class="contact-product">
+                            <span class="ti-money"></span>
+                            <p class="contact-text">Giá dự đoán: 0 VNĐ</p>
+                        </div>
+
+                        <hr>
+
+                        <div class="description-content">
+                            <div class="title-content">Chi tiết sản phẩm</div>
+                            <div class="table-content">
+                                <table class="text-table">
+                                    <tr>
+                                        <td class="table-item1">
+                                            <p>Loại sẩn phẩm</p>
+                                        </td>
+                                        <td class="table-item2">
+                                            {% if pid.floors > 0 %}
+                                                <p>Nhà ở</p>
+                                            {% else %}
+                                                <p>Đất nền</p>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+
+                                    {% if pid.floors > 0 %}
+                                    <tr>
+                                        <td class="table-item1">
+                                            <p>Vị trí nhà</p>
+                                        </td>
+                                        <td class="table-item2">
+                                            {% if pid.location_house == 0 %}
+                                                <p>Mặt tiền</p>
+                                            {% else %}
+                                                <p>Nhà hẻm</p>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="table-item1">
+                                            <p>Số tầng</p>
+                                        </td>
+                                        <td class="table-item2">
+                                            <p>{{ pid.floors }}</p>
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+
+                                    <tr>
+                                        <td class="table-item1">
+                                            <p>Khoảng cách đến trung tâm (Q. Ninh Kiều)</p>
+                                        </td>
+                                        <td class="table-item2">
+                                            <p>{{ pid.to_center }} Km</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+
+
+                        <hr>
+                    </div>
+
+                    <div class="comment-section">
+                        <span class="ti-comment"></span>
+                        <h3 style="display: inline">Phản hồi từ Khách hàng</h3>
+                    </div>
+
+            </div>
+        </div>
+        <!--end container-->
+
+    </div>
+
+
+</body>
+</html>

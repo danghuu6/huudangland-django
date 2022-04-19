@@ -1,0 +1,118 @@
+
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+
+
+.modal-container {
+    background-color: #fff;
+    width: 500px;
+    max-width: calc(100% - 32px);
+    min-height: 200px;
+    position: relative;
+    border: 1px solid #ccc;
+}
+
+.modal-close {
+   position: absolute;
+   top: 0;
+   right: 0;
+   padding: 8px;
+   color: #fff;
+}
+
+
+.modal-header {
+    height: 75px;
+    color: #fe6232;
+    text-transform: uppercase;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-body {
+    margin-top: 8px;
+}
+
+.modal-item {
+    margin: 32px 0;
+}
+
+
+.modal-input {
+    float: right;
+    margin-right: 75px;
+    font-size: 16px;
+    height: 32px;
+}
+
+
+.modal-input1 {
+    display: inline-block;
+    margin: 0 16px;
+}
+
+.radio-check {
+    float: right;
+    margin-right: 100px;
+}
+
+.modal-label {
+    margin-left: 75px;
+}
+
+
+.modal-btn {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 32px;
+    height: 32px;
+    width: 120px;
+    border: none;
+    background-color: #fe6232;
+    color: #fff;
+}
+
+.modal-btn:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.modal-footer {
+    text-align: center;
+    margin-right: 16px;
+    margin-bottom: 16px;
+}
+
+.modal-footer a {
+    color: #fe6232;
+}
+
+.modal-footer a:hover {
+    opacity: 0.6;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-140px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

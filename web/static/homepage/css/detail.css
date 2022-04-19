@@ -1,0 +1,162 @@
+.detail-container {
+    margin-top: 120px;
+    padding-top: 16px;
+    position: relative;
+}
+
+.detail-content {
+    margin-top: 16px;
+    margin: 0 240px;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 0;
+}
+
+.img-box {
+    position: relative;
+    width: 670px;
+    height: 500px;
+    border: 2px #fe6232 solid;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.img-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    display: block;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(64px);
+}
+
+.img-box img {
+    height: 100%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    
+}
+
+.img-position {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.icon-right {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    color: #fff;
+    font-size: 30px;
+    margin-right: 8px;
+    background-color: #fe6232;
+    padding: 6px;
+}
+
+.icon-left {
+    position: absolute;
+    color: #fff;
+    top: 50%;
+    font-size: 30px;
+    margin-left: 8px;
+    background-color: #fe6232;
+    padding: 6px;
+}
+
+.icon-left:hover,
+.icon-right:hover {
+    opacity: 0.6;
+}
+
+.info-box {
+    margin-top: 16px;
+}
+
+
+.title-product {
+    font-size: 25px;
+    text-transform: uppercase;
+    padding-top: 16px;
+}
+
+.address-product {
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.map-address {
+    color: #fe6232;
+    margin-right: 8px;
+}
+
+.address-product:hover,
+.map-address:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.contact-product,
+.price-product,
+.param-product {
+    padding: 24px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    margin: 8px 0;
+    border-radius: 8px;
+}
+
+
+.contact-text,
+.param-text,
+.price-text {
+    display: inline;
+    margin-left: 8px;
+}
+
+.contact-product {
+    float: right;
+    background-color: #fe6232;
+    color: #fff;
+}
+
+
+.description-content {
+    margin: 16px 0;
+}
+
+.title-content {
+    text-transform: uppercase;
+    font-size: 20px;
+    margin-top: 16px;
+}
+
+.table-content {
+    margin: 32px 0;
+}
+
+.table-item1,
+.table-item2 {
+    width: 350px;
+    height: 35px;
+}
+
+.table-item1 p,
+.table-item2 p {
+    margin-left: 16px;
+
+}
+
+.text-table td {
+    border: 1px solid;
+}
+
+.comment-section {
+    margin-top: 16px;
+    height: 150px;
+}

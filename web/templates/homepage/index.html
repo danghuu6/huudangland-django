@@ -1,0 +1,348 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Định Giá Nhà Đất</title>
+    <link rel="icon" href="{% static 'homepage/img/logo-bds.png' %}" type="image/x-icon" >
+    <link rel="stylesheet" href=" {% static 'homepage/css/style.css'%}">
+    <link rel="stylesheet" href=" {% static 'homepage/css/detail.css'%}">
+    <link rel="stylesheet" href=" {% static 'homepage/css/modal.css' %}">
+    <link rel="stylesheet" href=" {% static 'homepage/fonts/themify-icons/themify-icons.css'%} ">
+</head>
+<body>
+    <div id="main">
+        <!--Begin Header-->
+        <header class="header">
+            <div class="nav">
+                <ul class="nav-list">
+                    <li class="nav-items item-left">Định Giá Nhà Đất</li>
+                </ul>
+                <ul class="nav-list item-right">
+                    <a href="{% url 'register' %}">
+                        <li class="nav-items item-right-1">Đăng ký</li>
+                    </a>
+
+                    <a href="{% url 'login' %}">
+                        <li class="nav-items">Đăng nhập</li>
+                    </a>
+
+
+                </ul>
+                
+            </div>
+
+            <div class="header-item">
+                
+                <a href="{% url 'index' %}"><img src="{% static 'homepage/img/logo-bds.png'%}" alt="" class="logo-bds"></a>
+                <div class="header-search">
+                    <div class="frame-search-input">
+                        <input type="text" class="search-input" placeholder="Tìm kiếm sản phẩm tại đây">
+                        <div class="ti-search search-icon"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!--End Header-->
+
+        <!--Begin Container-->
+        <div class="container">
+            <div class="content">
+                <!--Begin Filter-->
+                <div class="position-fixed">
+
+                    <div class="content-filter">
+                        <div class="filter-list">
+                            <div class="filter-list-item">
+                                <span class="filter-topic">Loại Nhà Đất:</span>
+                                <select name="loai-bds" id="" class="filter-select">
+                                    <option value="0">-- Loại Nhà Đất --</option>
+                                    <option value="1">Nhà ở</option>
+                                    <option value="2">Đất nền</option>
+                                    <option value="3">Chung cư</option>
+                                </select>
+                            </div>
+                            <div class="filter-list-item">
+                                <span class="filter-topic">Địa Điểm:</span>
+                                <select name="dia-diem" id="" class="filter-select">
+                                    <option value="4">-- Quận/Phường/Khu vực --</option>
+                                    <option value="5">Quận Ninh Kiều</option>
+                                    <option value="6">Quận Cái Răng</option>
+                                    <option value="7">Quận Bình Thủy</option>
+                                    <option value="8">Quận Bình Thủy</option>
+                                    <option value="9">Quận Bình Thủy</option>
+                                    <option value="10">Huyện Cờ Đỏ</option>
+                                    <option value="11">Huyện Phong Điền</option>
+                                    <option value="12">Huyện Thới Lai</option>
+                                    <option value="13">Huyện Vĩnh Thạnh</option>
+                                </select>
+                            </div>
+                            <div class="filter-list-item">
+                                <span class="filter-topic">Giá Bán:</span>
+                                <select name="gia-ban" id="" class="filter-select">
+                                    <option value="14">-- Giá Bán --</option>
+                                    <option value="15">Dưới 1 Tỷ</option>
+                                    <option value="16">Từ 1 Tỷ Đến 5 Tỷ</option>
+                                    <option value="17">Từ 5 Tỷ Đến 10 Tỷ</option>
+                                    <option value="18">Từ 10 Tỷ Trở Lên</option>
+                                </select>
+                            </div>
+                            <div class="filter-list-item">
+                                <span class="filter-topic">Thứ Tự Sắp Xếp:</span>
+                                <select name="sap-xep" id="" class="filter-select">
+                                    <option value="19">-- Sắp Xếp --</option>
+                                    <option value="20">Giá Trị Tăng Dần</option>
+                                    <option value="21">Giá Trị Giảm Dần</option>
+                                </select>
+                            </div>
+        
+                            <span class="filter-btn">Tìm kiếm</span>
+                        </div>
+                    </div>
+                </div>
+                <!--End Filter-->
+
+                <!--Begin Product List-->
+                <div class="product-list">
+
+
+                    {% for i in p %}
+                    <a href="{% url 'detail' i.id%}">
+                        <div class="product-item">
+                        <img src="{{ i.image }}" alt="" class="product-img">
+                        <div class="product-body">
+                            <h3 class="product-name">{{ i.title }}</h3>
+                            <div class="product-price"><i>Click vào sản phẩm để xem chi tiết</i></div>
+                            <div class="product-place">Ninh Kiều, Cần Thơ</div>
+                        </div>
+                    </div>
+                    </a>
+                    {% endfor %}
+
+
+
+                    <div style="clear:left"></div>
+                    <div style="text-align: center;">
+
+                        <div class="site-list-product">
+                            <ul>
+                                <li><a href="">1</a></li>
+                                <li><a href="">2</a></li>
+                                <li><a href="">3</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+                <!--End Product List-->
+            </div>
+        </div>
+        <!--End Container-->
+
+    </div>
+
+    <div class="modal js-modal-login">
+    <div class="modal-container js-modal-login-container">
+        <div class="modal-close js-modal-login-close">
+            <i class="ti-close"></i>
+        </div>
+
+        <div class="modal-header">
+            Đăng nhập
+        </div>
+
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <div class="modal-body">
+            <div class="modal-item">
+
+                <label for="modal-signin-phone" class="modal-label">
+                    Số điện thoại:
+                </label>
+                <input type="text" id="modal-signin-phone" class="modal-input" placeholder="Số điện thoại" name="username">
+
+            </div>
+
+            <div class="modal-item">
+
+                <label for="modal-signin-password" class="modal-label">
+                    Mật khẩu:
+                </label>
+                <input type="password" id="modal-signin-password" class="modal-input" placeholder="Mật khẩu" name="password">
+            </div>
+
+            <button type="submit" class="modal-btn">
+                Đăng nhập
+            </button>
+        </div>
+        </form>
+
+
+        <footer class="modal-footer">
+            Nếu chưa đăng ký thành vên? <a href="#" class="js-to-signin">Đăng ký</a>
+        </footer>
+    </div>
+</div>
+
+    <div class="modal js-modal-signin">
+    <div class="modal-container js-modal-container">
+        <div class="modal-close js-modal-close">
+            <i class="ti-close"></i>
+        </div>
+
+        <div class="modal-header">
+            Đăng ký Thành viên
+        </div>
+
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="modal-body">
+            <div class="modal-item">
+
+                <label for="modal-signin-phone" class="modal-label">
+                    Số điện thoại:
+                </label>
+                <input type="text" id="modal-signin-phone" class="modal-input" placeholder="Số điện thoại" name="phone-register">
+
+            </div>
+
+            <div class="modal-item">
+
+                <label for="modal-signin-name" class="modal-label">
+                    Họ và tên:
+                </label>
+                <input type="text" id="modal-signin-name" class="modal-input" placeholder="Họ và tên" name="name-register">
+            </div>
+
+            <div class="modal-item">
+
+                <label for="modal-signin-password" class="modal-label">
+                    Mật khẩu:
+                </label>
+                <input type="password" id="modal-signin-password" class="modal-input" placeholder="Mật khẩu" name="password-register">
+            </div>
+
+            <div class="modal-item">
+
+                <label for="modal-signin-birthday" class="modal-label">
+                    Ngày, tháng, năm sinh:
+                </label>
+                <input type="date" id="modal-signin-birthday" class="modal-input" name="birthday-register">
+            </div>
+
+            <div class="modal-item">
+                <label for="" class="modal-label">
+                    Giới tính:
+                </label>
+
+                <span class="radio-check">
+
+                    <div class="modal-input1">
+
+                        <input type="radio" checked="checked" class="modal-input-male" name="modal-radio" id="1" value="1">
+                        <label for="1" class="radio">Nam
+                        </label>
+                    </div>
+
+                    <div class="modal-input1">
+
+                        <input type="radio" class="modal-input-female" name="modal-radio" id="2" value="2">
+                        <label for="2" class="radio">Nữ
+                        </label>
+                    </div>
+                </span>
+
+            </div>
+
+            <button class="modal-btn" type="submit">
+                Đăng ký
+            </button>
+        </div>
+        </form>
+
+
+        <footer class="modal-footer">
+            Bạn đã là thành vên? <a href="#" class="js-to-login">Đăng nhập</a>
+        </footer>
+    </div>
+</div>
+
+    <script>
+        const signinClick = document.querySelector('.js-signin-click')
+        const modalSignin = document.querySelector('.js-modal-signin')
+        const closeModal = document.querySelector('.js-modal-close')
+        const modalContainer = document.querySelector('.js-modal-container')
+
+        const loginClick = document.querySelector('.js-login-click')
+        const closeModalLogin = document.querySelector('.js-modal-login-close')
+        const modalLogin = document.querySelector('.js-modal-login')
+        const modalLoginContainer = document.querySelector('.js-modal-login-container')
+
+
+        const clickToLogin = document.querySelector('.js-to-login')
+        const clickToSignin = document.querySelector('.js-to-signin')
+
+        //Ẩn trang đăng ký chuyển sang trang đăng nhập
+        clickToLogin.addEventListener('click', function() {
+            hideModalSignin()
+            showModalLogin()
+        })
+
+        //Ẩn trang đăng nhập chuyên sang trang đăng ký
+        clickToSignin.addEventListener('click', function() {
+            hideModalLogin()
+            showModalSignIn()
+        })
+
+        // Hiển thị trang đăng ký
+        function showModalSignIn() {
+            modalSignin.classList.add('open')
+        }
+
+        // Ẩn trang đăng ký
+        function hideModalSignin() {
+            modalSignin.classList.remove('open')
+        }
+
+        // Hiển thị trang đăng nhập
+        function showModalLogin() {
+            modalLogin.classList.add('open')
+        }
+
+        // Ẩn trang đăng nhập
+        function hideModalLogin() {
+            modalLogin.classList.remove('open')
+        }
+
+        // Tắt hiện tượng nổi bột
+        function stopPropagationClick (event) {
+            event.stopPropagation()
+        }
+
+        // Đăng ký
+        signinClick.addEventListener('click', showModalSignIn)
+
+        closeModal.addEventListener('click', hideModalSignin)
+
+        modalSignin.addEventListener('click', hideModalSignin)
+
+        //Đăng nhập
+        loginClick.addEventListener('click', showModalLogin)
+
+        closeModalLogin.addEventListener('click', hideModalLogin)
+
+        modalLogin.addEventListener('click', hideModalLogin)
+
+
+        modalContainer.addEventListener('click', stopPropagationClick)
+
+        modalLoginContainer.addEventListener('click', stopPropagationClick)
+
+
+    </script>
+
+</body>
+</html>

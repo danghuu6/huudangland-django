@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - Định Giá Nhà Đất</title>
+    <link rel="icon" href="{% static 'homepage/img/logo-bds.png' %}" type="image/x-icon" >
+    <link rel="stylesheet" href=" {% static 'homepage/css/form.css'%}">
+    <link rel="stylesheet" href=" {% static 'homepage/fonts/themify-icons/themify-icons.css'%} ">
+</head>
+<body>
+    <div id="main">
+        <div class="modal js-modal-login">
+    <div class="modal-container js-modal-login-container">
+        <div class="modal-close js-modal-login-close">
+            <i class="ti-close"></i>
+        </div>
+
+        <div class="modal-header">
+            Đăng nhập
+        </div>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="modal-body">
+            <div class="modal-item">
+
+                <label for="modal-signin-phone" class="modal-label">
+                    Số điện thoại:
+                </label>
+                <input type="text" id="modal-signin-phone" class="modal-input" placeholder="Số điện thoại" name="username">
+
+            </div>
+
+            <div class="modal-item">
+
+                <label for="modal-signin-password" class="modal-label">
+                    Mật khẩu:
+                </label>
+                <input type="password" id="modal-signin-password" class="modal-input" placeholder="Mật khẩu" name="password">
+            </div>
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+            <button type="submit" class="modal-btn">
+                Đăng nhập
+            </button>
+        </div>
+        </form>
+
+
+        <footer class="modal-footer">
+            Nếu chưa đăng ký thành vên? <a href="{% url 'register' %}" class="js-to-signin">Đăng ký</a>
+        </footer>
+    </div>
+</div>
+    </div>
+</body>
+</html>
