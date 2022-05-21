@@ -26,3 +26,11 @@
 
 - Usecase của quản lý <br>
 ![ucquanly](https://user-images.githubusercontent.com/81134060/169634974-bc605940-956c-4693-be7f-5aaef9fc9208.png)
+
+# Giao diện website
+- Trang chủ <br>
+![trangchu](https://user-images.githubusercontent.com/81134060/169635194-389087f5-4801-49f9-be79-79c878462776.png)
+
+- Xem chi tiết sản phẩm <br>
+![chitiet](https://user-images.githubusercontent.com/81134060/169635212-ad9f73a1-69ae-4d9d-b241-48800e7face0.png)
+
