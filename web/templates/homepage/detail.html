@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ pid.title }}</title>
-    <link rel="icon" href="{% static 'homepage/img/logo-bds.png' %}" type="image/x-icon" >
+    <title>{{ product.title }}</title>
+    <link rel="icon" href="{% static 'homepage/img/HdangLand_xanhluc_final.png' %}" type="image/x-icon" >
     <link rel="stylesheet" href=" {% static 'homepage/css/style.css'%}">
     <link rel="stylesheet" href=" {% static 'homepage/css/detail.css'%}">
     <link rel="stylesheet" href=" {% static 'homepage/css/modal.css' %}">
@@ -21,28 +21,56 @@
                 <ul class="nav-list">
                     <li class="nav-items item-left">Định Giá Nhà Đất</li>
                 </ul>
+                <p id="demo"></p>
+
+                {% if user.is_authenticated %}
+                    <ul class="nav-list item-right">
+                    <a href="#" style="text-decoration: none">
+                        <li class="nav-items item-right-1"><i>Xin chào</i>, {{ user.name_customer }}</li>
+                    </a>
+
+                    <a href="{% url 'logout' %}?next={{ request.path }}" class="text-decoration: none">
+                        <li class="nav-items">Đăng xuất</li>
+                    </a>
+
+
+                </ul>
+                {% else %}
                 <ul class="nav-list item-right">
-                    <a href="{% url 'register' %}">
+                    <a href="{% url 'register' %}?next={{ request.path }}" style="text-decoration: none">
                         <li class="nav-items item-right-1">Đăng ký</li>
                     </a>
 
-                    <a href="{% url 'login' %}">
+                    <a href="{% url 'login' %}?next={{ request.path }}">
                         <li class="nav-items">Đăng nhập</li>
                     </a>
+
+
                 </ul>
-                
+                {% endif %}
+
             </div>
 
             <div class="header-item">
                 
-                <a href="{% url 'index' %}"><img src="{% static 'homepage/img/logo-bds.png'%}" alt="" class="logo-bds"></a>
+                <a href="{% url 'index' %}"><img src="{% static 'homepage/img/HdangLand_xanhluc_final.png'%}" alt="" class="logo-bds"></a>
                 <div class="header-search">
-                    <div class="frame-search-input">
-                        <input type="text" class="search-input" placeholder="Tìm kiếm sản phẩm tại đây">
-                        <div class="ti-search search-icon"></div>
+                    <form action="{% url 'index' %}" method="get">
+                        {% csrf_token %}
+                         <div class="frame-search-input">
+                        <input type="text" name="search" class="search-input" placeholder="Tìm kiếm sản phẩm tại đây">
+                             <input class="search-icon" type="submit" value="Tìm kiếm">
+<!--                        <div class="ti-search search-icon"></div>-->
                     </div>
+                    </form>
                 </div>
             </div>
+            <a href="{% url 'predict-product' %}">
+                <i class="predict-class">Định giá tại đây!</i>
+            </a>
+            {% if user.is_staff %}
+            <a href="{% url 'manage-page' %}" class="manage-page">Vào trang quản lý</a>
+            {% endif %}
         </header>
         <!--end header-->
 
@@ -52,46 +80,55 @@
 
 
                     <div class="img-box">
+
                         <div class="img-item">
-                            <img src="{{ pid.image }}" alt="" class="img-position">
+                            {% for i in product.image %}
+                            <img src="{{ i }}" alt="" class="t img-position" id="img-detail-js">
+                            {% endfor %}
                         </div>
-    
-                        <a href="#">
-                            <div class="ti-angle-right icon-right"></div>
-                        </a>
-                        <a href="#">
-                            <div class="ti-angle-left icon-left"></div>
-                        </a>
+
+
+                        <button class="ti-angle-right icon-right" onclick="plusDivs(1)"></button>
+                        <button class="ti-angle-left icon-left" onclick="plusDivs(-1)"></button>
+
+
                     </div>
 
                     <div class="info-box">
 
                         <div class="title-product">
-                            {{ pid.title }}
+                            {{ product.title }}
                         </div>
 
                         <div class="address-product">
                             <span class="ti-map-alt map-address"></span>
-                            {{ pid.address }}
+                            {{ product.address }}
                         </div>
 
                         <hr>
 
-                        <div class="price-product">
-                            <span class="ti-money"></span> 
-                            <p class="price-text">Giá gốc: {{ pid.price }}</p>
-                        </div>
+<!--                        <div class="price-product">-->
+<!--                            <span class="ti-money"></span>-->
+<!--                            <p class="price-text">Giá gốc: {{ product.price }}</p>-->
+<!--                        </div>-->
 
                         <div class="param-product">
                             <span class="ti-home"></span>
-                            <p class="param-text">Diện tích: {{ pid.area}} m2</p>
+                            <p class="param-text">Diện tích: {{ product.area }} m2</p>
                         </div>
 
+                        {% if user.is_authenticated %}
                         <div class="contact-product">
                             <span class="ti-money"></span>
-                            <p class="contact-text">Giá dự đoán: 0 VNĐ</p>
+                            <p class="contact-text">{{ product.price_predict }}</p>
                         </div>
-
+                        {% else %}
+                        <div class="contact-product">
+                            <span class="ti-money"></span>
+                            <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+                            <a href="{% url 'login' %}?next={{ request.path }}" style="color: #fff; text-decoration:none"><p class="contact-text"><i>Đăng nhập để xem giá dự đoán</i></p></a>
+                        </div>
+                        {% endif %}
                         <hr>
 
                         <div class="description-content">
@@ -103,7 +140,7 @@
                                             <p>Loại sẩn phẩm</p>
                                         </td>
                                         <td class="table-item2">
-                                            {% if pid.floors > 0 %}
+                                            {% if product.floors > 0 %}
                                                 <p>Nhà ở</p>
                                             {% else %}
                                                 <p>Đất nền</p>
@@ -111,58 +148,155 @@
                                         </td>
                                     </tr>
 
-                                    {% if pid.floors > 0 %}
+
                                     <tr>
                                         <td class="table-item1">
-                                            <p>Vị trí nhà</p>
+                                            <p>Vị trí</p>
                                         </td>
                                         <td class="table-item2">
-                                            {% if pid.location_house == 0 %}
+                                            {% if product.location_house == 1 %}
                                                 <p>Mặt tiền</p>
                                             {% else %}
-                                                <p>Nhà hẻm</p>
+                                                <p>Hẻm</p>
                                             {% endif %}
                                         </td>
                                     </tr>
 
+                                    {% if product.floors > 0 %}
                                     <tr>
                                         <td class="table-item1">
                                             <p>Số tầng</p>
                                         </td>
                                         <td class="table-item2">
-                                            <p>{{ pid.floors }}</p>
+                                            <p>{{ product.floors }}</p>
                                         </td>
                                     </tr>
                                     {% endif %}
+
 
                                     <tr>
                                         <td class="table-item1">
                                             <p>Khoảng cách đến trung tâm (Q. Ninh Kiều)</p>
                                         </td>
                                         <td class="table-item2">
-                                            <p>{{ pid.to_center }} Km</p>
+                                            {% if product.to_center == 0.0 %}
+                                            <p>Trung tâm</p>
+                                            {% else %}
+                                            <p>{{ product.to_center }} Km</p>
+                                            {% endif %}
                                         </td>
                                     </tr>
                                 </table>
                             </div>
                         </div>
 
-
-
-                        <hr>
                     </div>
 
-                    <div class="comment-section">
+
+                {% if p_suggest %}
+
+                    <div class="suggest-section">
+                        <div class="suggest-title">Sản phẩm có cùng khu vực</div>
+                        {% for product in p_suggest %}
+                        <a href="{% url 'detail' product.id%}">
+                            <div class="product-list product-list1">
+                                <div class="product-item">
+                                    <img src="{{ product.image }}" alt="" class="product-img product-img1">
+                                    <div class="product-body">
+                                        <h3 class="product-name">{{ product.title }}</h3>
+                                        <div class="product-price"><i>Click vào sản phẩm để xem chi tiết</i></div>
+                                        <div class="product-place">{{ product.address }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+
+                {% endif %}
+
+                <div class="comment-section">
                         <span class="ti-comment"></span>
-                        <h3 style="display: inline">Phản hồi từ Khách hàng</h3>
+                        <label for="text-area" class="comment-title">Phản hồi của khách hàng</label>
+                        <i style="color: rgb(178, 169, 169);">({{ count_cmt }} phản hồi cho sản phẩm này)</i>
+
+                        {% if user.is_authenticated %}
+                        <div class="comment-content-section">
+
+                            <form action="" method="post" class="form-comment">
+                                {% csrf_token %}
+                                <textarea name="comment-content" id="text-area" rows="4" class="comment-content" placeholder="Viết phản hồi của bạn tại đây"></textarea>
+
+                                <label for="sdt">Số điện thoại</label>
+                                <i style="color: red;">(Để lại số điện thoại khi có nhu cầu cần tư vấn)</i>
+                                <input type="text" class="comment-phone" id="sdt" name="comment-phone" placeholder="Nhập số điện thoại (không bắt buộc)">
+
+                                <input type="hidden" name="customer-id" value="{{ user.phone_number }}">
+
+                                <input type="submit" class="comment-btn" value="Gửi">
+                            </form>
+                            <hr>
+
+                            {% if hist_cmt %}
+                            {% for cmt in hist_cmt %}
+                            {% if cmt.customer.phone_number == user.phone_number %}
+                            <div class="history-cmt-container">
+                                <div class="history-comment">
+                                    <div class="user-img-box">
+
+                                        <img src="{% static 'homepage/img/user.png'%}" alt="" class="user-img">
+                                    </div>
+                                    <div class="history-comment-content">
+
+                                        <div class="comment-time">{{ cmt.time }}</div>
+                                        <div class="history-content">{{ cmt.content }}</div>
+                                        <a href="{% url 'delcmt' %}?cmt-id={{ cmt.id }}&next={{ request.path }}" onclick="myFunction()">Xóa</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                            {% else %}
+                            <i>Bạn chưa có phản hồi nào cho sản phẩm này</i>
+                            {% endif %}
+                        </div>
+                        {% else %}
+                            <a href="{% url 'login' %}?next={{ request.path }}" class="comment-temp">
+                                <i>Đăng nhập viết phản hồi</i>
+                            </a>
+
+                        {% endif %}
                     </div>
+
 
             </div>
         </div>
         <!--end container-->
 
     </div>
+    <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
 
+        function plusDivs(n) {
+          showDivs(slideIndex += n);
+        }
+
+        function showDivs(n) {
+          var i;
+          var x = document.getElementsByClassName("img-position");
+          if (n > x.length) {slideIndex = 1}
+          if (n < 1) {slideIndex = x.length}
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+          }
+          x[slideIndex-1].style.display = "block";
+        }
+
+        function myFunction() {
+              confirm("Bạn muốn xóa bình luận này!");
+         }
+    </script>
 
 </body>
 </html>

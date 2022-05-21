@@ -1,0 +1,110 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhập thông tin định giá</title>
+    <link rel="icon" href="{% static 'homepage/img/logo-bds.png' %}" type="image/x-icon" >
+    <link rel="stylesheet" href=" {% static 'homepage/css/form.css'%}">
+    <link rel="stylesheet" href=" {% static 'homepage/fonts/themify-icons/themify-icons.css'%} ">
+</head>
+<body>
+    <div id="main">
+        <div class="modal js-modal-login">
+            <a href="/" class="back-page"><i class="ti-arrow-left"></i> Trở về</a>
+    <div class="modal-container js-modal-login-container">
+        <div class="modal-close js-modal-login-close">
+            <i class="ti-close"></i>
+        </div>
+
+        <div class="modal-header" style="font-size: 30px">
+            Nhập thông tin định giá
+        </div>
+
+        <form action="{% url 'predict-product' %}" method="post">
+            {% csrf_token %}
+            <div class="modal-body">
+            <div class="modal-item">
+
+                <label for="modal-signin-phone" class="modal-label">
+                    Tên BĐS:
+                </label>
+                <input type="text" id="modal-signin-phone" class="modal-input" placeholder="" name="name-land-predict">
+
+            </div>
+
+
+                <div class="modal-item">
+
+                <label for="land-area-predict" class="modal-label">
+                    Diện tích: <span style="color: red">(*)</span>
+                </label>
+                <input type="text" id="land-area-predict" class="modal-input" placeholder="" name="area-predict">
+            </div>
+
+                <div class="modal-item">
+
+                <label for="floors-predict" class="modal-label">
+                    Số tầng: <span style="color: red">(*)</span>
+                </label>
+                <input type="text" id="floors-predict" class="modal-input" placeholder="" name="floors-predict">
+            </div>
+
+                <div class="modal-item">
+
+                <label for="to-center-predict" class="modal-label">
+                    KC Đến trung tâm: <span style="color: red">(*)</span>
+                </label>
+                <input type="text" id="to-center-predict" class="modal-input" placeholder="" name="tocenter-predict">
+            </div>
+
+                <div class="modal-item">
+
+                <label class="modal-label">
+                    Vị trí: <span style="color: red">(*)</span>
+                </label>
+                <select id="lo" name="location"  class="modal-input" style="margin-right: 195px">
+                  <option value="1">Mặt tiền</option>
+                  <option value="2">Hẻm</option>
+
+                </select>
+            </div>
+
+<!--                <div class="modal-item">-->
+
+<!--                <label for="image-predict" class="modal-label" >-->
+<!--                    Hình ảnh:-->
+<!--                </label>-->
+<!--                <input type="file" id="image-predict" class="modal-input" value="upload" name="image-predict" webkitdirectory multiple>-->
+<!--            </div>-->
+
+                <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+
+                <div class="modal-item">
+
+                <label for="email-predict" class="modal-label">
+                    Email: <span style="color: red">(*)</span>
+                </label>
+                <input type="email" id="email-predict" class="modal-input" placeholder="" name="email-predict">
+            </div>
+            <input type="hidden" name="predict-er" value="{{ user.name_customer }}"/>
+                <input type="hidden" name="id-user" value="{{ user.phone_number }}"/>
+            {% if value_predict %}
+                <p style="text-align: center; color: red"><i>Hãy kiểm tra email, chúng tôi đã gửi thông tin vào email của bạn</i></p>
+                {% endif %}
+            <button type="submit" class="modal-btn">
+                Định giá
+            </button>
+        </div>
+        </form>
+
+
+
+    </div>
+</div>
+    </div>
+</body>
+</html>

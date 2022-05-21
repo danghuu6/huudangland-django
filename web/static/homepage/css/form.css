@@ -12,7 +12,22 @@
     display: flex;
 }
 
+.back-page {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
 
+    margin-left: 32px;
+    padding: 16px;
+    text-decoration: none;
+    color: #fe6232;
+}
+
+.back-page:hover {
+    color: #fff;
+    background-color: #fe6232;
+}
 
 .modal-container {
     background-color: #fff;

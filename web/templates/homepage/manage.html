@@ -1,0 +1,247 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'homepage/img/HdangLand_xanhluc_final.png' %}" type="image/x-icon" >
+    <link rel="stylesheet" href="{% static 'homepage/css/manage.css' %}">
+    <title>Quản lý dữ liệu - Định giá nhà đất</title>
+</head>
+<body>
+    <div class="main">
+        <div class="header">
+            <a href="/">
+                <div class="logo">
+                <img src="{% static 'homepage/img/HdangLand_xanhluc_final.png' %}" alt="">
+            </div>
+            </a>
+
+            {% if user.is_staff %}
+            <ul class="menu-list">
+                <a href="{% url 'manage-page' %}"><li>Quản lý dữ liệu</li></a>
+
+                
+            </ul>
+            {% else %}
+            <ul class="menu-list">
+                <a href="{% url 'index' %}"><li>Bạn có quyền xem thông tin</li></a>
+
+
+            </ul>
+            {% endif %}
+        </div>
+
+        {% if user.is_staff %}
+        <div class="container">
+            <div class="content">
+                <div class="filter-view">
+                    <form action="{% url 'manage-page' %}" method="get">
+                        {% csrf_token %}
+                        <div class="content-filter">
+                            <div class="filter-list">
+                                <div class="filter-item">
+
+                                    <select name="view-list" id="" class="filter-select">
+                                        <option value="">-- Chế độ xem --</option>
+                                        <option value="product">Danh sách bất động sản</option>
+                                        <option value="predict">Lịch sử dự đoán của khách hàng</option>
+                                        <option value="customer">Danh sách thành viên</option>
+                                        <option value="feedback">Danh sách phản hồi</option>
+                                    </select>
+                                </div>
+                                <input class="filter-btn" value="OK" type="submit" style="border: none">
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                {% if view == 'pro'%}
+                <div class="nav-engine">
+                    <a href="{% url 'create-data' %}?next={{ request.path }}" class="js-login-click">Thêm dữ liệu</a>
+                </div>
+                <h2>Đây là danh sách bất động sản của hệ thống <i>(Tổng {{ item_count }} bđs)</i></h2>
+                <div class="table-section">
+                    <table class="data-table">
+                        <tr>
+                            <th>id</th>
+                            <th class="name-product">Tên BĐS</th>
+                            <th>Loại</th>
+                            <th>Diện tích m2</th>
+                            <th class="name-product">Địa chỉ</th>
+                            <th>Vị trí</th>
+                            <th>Số tầng</th>
+                            <th>KC đến TT</th>
+                            <th>Giá gốc</th>
+                            <th>Giá dự đoán</th>
+                            <th></th>
+                            
+                          </tr>
+                        {% for p in view_list %}
+                          <tr>
+                            <td>{{ p.id }}</td>
+                            <td>{{ p.title }}</td>
+                              {% if p.floors != 0 %}
+                              <td>Nhà ở</td>
+                              {% else %}
+                              <td>Đất nền</td>
+                              {% endif %}
+                            <td>{{ p.area }}</td>
+                            <td>{{ p.address }}</td>
+                            {% if p.location_house == 1 %}
+                              <td>Mặt tiền</td>
+                              {% else %}
+                              <td>Hẻm</td>
+                              {% endif %}
+                            <td>{{ p.floors }}</td>
+                            <td>{{ p.to_center }}</td>
+                            <td>{{ p.price }}</td>
+                            <td>{{ p.price_predict }}</td>
+                            <td>
+                                <a href="{% url 'update-data' p.id %}?next={{ request.path }}">Sửa</a>
+                                <a href="{% url 'delproduct' %}?product-id={{ p.id }}&next={{ request.path }}" onclick="myFunction()">Xóa</a>
+                            </td>
+                            
+                          </tr>
+                        {% endfor %}
+                          
+                          
+                    </table>
+                </div>
+                {% elif view == 'pre' %}
+                    <h2>Đây là lịch sử định giá của khách hàng <i>(Tổng {{ item_count }} lượt định giá)</i></h2>
+                    <div class="table-section">
+                    <table class="data-table">
+                        <tr>
+                            <th>id</th>
+                            <th>SĐT khách hàng</th>
+
+                            <th>Loại BĐS</th>
+                            <th>Diện tích m2</th>
+                            <th>Vị trí</th>
+                            <th>Số tầng</th>
+                            <th>KC đến TT</th>
+                            <th>Giá dự đoán</th>
+                            <th>Thời gian</th>
+                            <th>Email nhận phản hồi</th>
+
+                          </tr>
+                        {% for p in view_list %}
+                          <tr>
+                            <td>{{ p.id }}</td>
+                            <td>{{ p.customer.phone_number }}</td>
+
+                              {% if p.floors != 0 %}
+                              <td>Nhà ở</td>
+                              {% else %}
+                              <td>Đất nền</td>
+                              {% endif %}
+                            <td>{{ p.area }}</td>
+
+                            {% if p.location_house == 1 %}
+                              <td>Mặt tiền</td>
+                              {% else %}
+                              <td>Hẻm</td>
+                              {% endif %}
+                            <td>{{ p.floors }}</td>
+                            <td>{{ p.to_center }}</td>
+
+                            <td>{{ p.price_predict }}</td>
+                            <td>{{ p.time }}</td>
+                              <td>{{ p.email }}</td>
+
+                          </tr>
+                        {% endfor %}
+
+
+                    </table>
+                </div>
+                {% elif view == 'c' %}
+                <h2>Danh sách đã đăng ký thành viên <i>(Tổng {{ item_count }} thành viên)</i></h2>
+                    <div class="table-section">
+                    <table class="data-table">
+                        <tr>
+                            <th>SĐT đăng ký</th>
+                            <th>Họ và tên</th>
+                            <th>Ngày sinh</th>
+                            <th>Giới tính</th>
+                            <th>Ngày đăng ký</th>
+                            <th>Vai trò</th>
+
+                          </tr>
+                        {% for p in view_list %}
+                          <tr>
+                            <td>{{ p.phone_number }}</td>
+                            <td>{{ p.name_customer }}</td>
+                            <td>{{ p.date_of_birth }}</td>
+                              {% if p.gt == True %}
+                            <td>Nam</td>
+                              {% else %}
+                              <td>Nữ</td>
+                              {% endif %}
+                            <td>{{ p.time }}</td>
+
+                              {% if p.is_admin %}
+                              <td>Admin</td>
+                                {% elif p.is_staff %}
+                              <td>Nhân viên</td>
+                              {% else %}
+                              <td>Khách hàng</td>
+                              {% endif %}
+
+                          </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+                {% elif view == 'f' %}
+                <h2>Danh sách phản hồi của khách hàng <i>(Tổng {{ item_count }} phản hồi)</i></h2>
+                    <div class="table-section">
+                    <table class="data-table">
+                        <tr>
+                            <th>ID</th>
+                            <th>SĐT Khách hàng</th>
+                            <th>ID sản phẩm</th>
+                            <th>Nội dung phản hồi</th>
+                            <th>Thời gian</th>
+                            <th>SĐT khác (nếu có)</th>
+
+                          </tr>
+                        {% for p in view_list %}
+                          <tr>
+                            <td>{{ p.id }}</td>
+                            <td>{{ p.customer.phone_number }}</td>
+                            <td>{{ p.product.id }}</td>
+                            <td>{{ p.content }}</td>
+                              <td>{{ p.time }}</td>
+                              {% if p.tel_contact %}
+                              <td>{{ p.tel_contact }}</td>
+                              {% else %}
+                              <td>Không có</td>
+                              {% endif %}
+                          </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+
+                {% endif%}
+            </div>
+        </div>
+
+        {% endif %}
+    </div>
+
+
+        <script>
+            function myFunction() {
+
+              confirm("Bạn muốn xóa sản phẩm này!");
+            }
+        </script>
+  
+</body>
+</html>

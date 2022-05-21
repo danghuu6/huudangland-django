@@ -10,6 +10,11 @@
     display: none;
 }
 
+.back {
+    position: absolute;
+    top: 0;
+}
+
 .open {
     display: flex;
 }

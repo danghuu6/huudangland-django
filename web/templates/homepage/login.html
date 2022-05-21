@@ -13,11 +13,13 @@
 </head>
 <body>
     <div id="main">
+
         <div class="modal js-modal-login">
+            <a href="{{ request.GET.next }}" class="back-page"><i class="ti-arrow-left"></i> Trở về</a>
     <div class="modal-container js-modal-login-container">
-        <div class="modal-close js-modal-login-close">
-            <i class="ti-close"></i>
-        </div>
+<!--        <div class="modal-close js-modal-login-close">-->
+<!--            <i class="ti-close"></i>-->
+<!--        </div>-->
 
         <div class="modal-header">
             Đăng nhập
@@ -42,7 +44,16 @@
                 </label>
                 <input type="password" id="modal-signin-password" class="modal-input" placeholder="Mật khẩu" name="password">
             </div>
-                <input type="hidden" name="next" value="{{ request.GET.next }}">
+
+                {% if request.GET.next == '/register/'%}
+                <input type="hidden" name="next" value="/"/>
+                {% elif request.GET.next %}
+                <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+                {% else %}
+                <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+                {% endif %}
+
+
             <button type="submit" class="modal-btn">
                 Đăng nhập
             </button>

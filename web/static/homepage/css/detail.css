@@ -42,11 +42,15 @@
 }
 
 .img-position {
-    display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    display: none;
 }
+
+.img-temp {
+    width: 100%;
+}
+
 
 .icon-right {
     position: absolute;
@@ -69,9 +73,15 @@
     padding: 6px;
 }
 
+.icon-left,
+.icon-right {
+    border: none;
+}
+
 .icon-left:hover,
 .icon-right:hover {
     opacity: 0.6;
+    cursor: pointer;
 }
 
 .info-box {
@@ -156,7 +166,115 @@
     border: 1px solid;
 }
 
+.suggest-section {
+    height: 300px;
+    margin-top: 48px;
+    margin-bottom: 100px;
+}
+
+.suggest-title {
+    text-transform: uppercase;
+    font-size: 24px;
+    margin-left: 8px;
+}
+
+.product-img1 {
+    width: 260px;
+    height: 175px;
+}
+
+.product-list1 {
+    margin-top: 32px;
+}
+
 .comment-section {
+    height: auto;
+    margin-top 50px;
+    margin-bottom: 100px;
+}
+
+.comment-title {
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.comment-content {
+    display: block;
+    height: 75px;
+    width: 50%;
+    margin: 8px 0;
+    border-radius: 6px;
+    padding: 8px;
+}
+
+.comment-phone {
+    display: block;
+    margin-top: 6px;
+    height: 35px;
+    width: 250px;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.comment-btn {
+    margin-top: 12px;
+    width: 75px;
+    height: 25px;
+    background-color: #fe6232;
+    color: #fff;
+    border: none
+}
+
+.comment-btn:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.comment-temp {
+    color: rgb(178, 169, 169);
+    display: block;
     margin-top: 16px;
-    height: 150px;
+    text-decoration: none;
+}
+
+.form-comment {
+    margin-bottom: 32px;
+}
+
+.history-comment {
+    margin-top: 16px;
+}
+
+.user-img-box {
+    display: inline-block;
+    width: 52px;
+}
+
+.user-img {
+    max-width: 100%;
+    height: 52px;
+}
+
+
+.history-comment-content {
+    display: inline-block;
+    margin-left: 16px;
+}
+
+.comment-time {
+    margin-bottom: 12px;
+    color: #ccc;
+}
+
+.history-content {
+    margin-bottom: 8px;
+    width: 900px;
+    height: auto;
+    overflow: auto;
+}
+
+.history-comment-content a {
+    margin-top: 16px;
+    font-size: 14px;
+    font-style: italic;
 }

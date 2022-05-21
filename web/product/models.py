@@ -10,4 +10,6 @@ class Product(models.Model):
     location_house = models.IntegerField(default=0)
     floors = models.IntegerField(default=0)
     to_center = models.FloatField(default=0.0)
-    image = models.CharField(max_length=255, default='')
+    image = models.TextField(default='')
+    price_predict = models.IntegerField(default=0, null=True)
+    time = models.DateTimeField(auto_now=True)

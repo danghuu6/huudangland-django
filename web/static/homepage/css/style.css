@@ -32,6 +32,8 @@ body {
     display: inline-block;
 }
 
+
+
 .nav-items {
     display: inline-block;
     color: #fff;
@@ -56,7 +58,9 @@ body {
 }
 
 .logo-bds {
-    max-width: 120px;
+    position: absolute;
+    top: 16px;
+    max-width: 200px;
     margin-left: 120px;
     margin-top: 16px;
 }
@@ -72,9 +76,12 @@ body {
 }
 
 .header-search {
+    position: absolute;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    top: 32px;
+    left: 370px;
 }
 
 .frame-search-input {
@@ -112,7 +119,7 @@ body {
 
 .container {
     margin-top: 120px;
-    height: 1000px;
+    margin-bottom: 32px;
 }
 
 .content { 
@@ -133,6 +140,7 @@ body {
     margin-top: 16px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     font-size: 14px;
+    margin-left: 24px;
 }
 
 .filter-list {
@@ -149,7 +157,7 @@ body {
 .filter-btn {
     color: #fff;
     margin-right: 8px;
-    padding: 8px 9px;
+    padding: 8px 24px;
     background-color: #fe6232;
     
 }
@@ -237,11 +245,63 @@ body {
 .site-list-product li {
     display: inline-block;
     list-style: none;
+
+}
+
+.site-list-product li a {
+    text-decoration: none;
+    color: #fe6232;
     padding: 8px;
-    border: #000 solid 1px;
+    border: #fe6232 solid 1px;
     margin: 8px;
 }
 
+.current {
+    background-color:#fe6232;
+    color: #fff;
+    padding: 8px;
+    border: #fe6232 solid 1px;
+    margin: 8px;
+}
 
+.current:hover {
+    cursor: pointer;
+}
+
+.site-list-product li a:hover {
+    background-color: #fe6232;
+    color: #fff
+}
+
+.predict-class {
+    position: absolute;
+    right: 130px;
+    bottom: 35px;
+    color: #fff;
+    padding: 8px;
+}
+
+.predict-class:hover {
+    opacity: 0.6;
+    cursor: pointer;
+    background-color: #fff;
+    color: #000;
+}
+
+.manage-page {
+    position: absolute;
+    top: 0;
+    right: 400px;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px;
+}
+
+.manage-page:hover {
+    opacity: 0.6;
+    cursor: pointer;
+    background-color: #fff;
+    color: #000;
+}
 
 

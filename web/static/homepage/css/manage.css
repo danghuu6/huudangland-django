@@ -1,0 +1,116 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    position: relative;
+    height: 115px;
+    background-color: #000;
+}
+
+.logo {
+    display: inline-block;
+}
+
+.header a {
+    text-decoration: none;
+}
+
+.logo img {
+    width: 150px;
+    margin: 15px;
+}
+
+.menu-list {
+    display: inline-block;
+
+}
+
+.menu-list li {
+    display: inline;
+    padding: 12px;
+    margin-bottom: 2px;
+    color: #fff;
+}
+
+.menu-list a {
+    text-decoration: none;
+}
+
+.menu-list li:hover{
+    background-color: #fff;
+    color: #000;
+}
+
+.content {
+    margin: 0 32px;
+    margin-top: 32px;
+    
+}
+
+.nav-engine {
+    display: inline-block;
+    padding: 8px;
+    border: 1px solid;
+    margin-bottom: 32px;
+}
+
+.nav-engine a {
+    text-decoration: none;
+}
+
+.nav-engine:hover {
+    background-color: #ccc;
+    color: #000;
+}
+
+.table-section {
+    margin-top: 16px;
+}
+
+.data-table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+  
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.name-product {
+    width: 300px;
+}
+
+.filter-view {
+    margin: 32px;
+}
+
+.filter-item {
+    display: inline-block;
+}
+
+.filter-select {
+    height: 30px;
+}
+
+.filter-btn {
+    margin-left: 8px;
+    display: inline-block;
+    padding: 8px 16px;
+
+}
+
+.filter-btn:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}

@@ -16,6 +16,9 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+MEDIA_URL = 'homepage/img/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/homepage/img')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -133,10 +136,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'core.backends.LoginAuthBackend',
-]
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',
+#     'core.backends.LoginAuthBackend',
+# ]
 
 
 TEMPLATE_CONTEXT_PROCESSORS = [
@@ -148,4 +151,14 @@ TEMPLATE_CONTEXT_PROCESSORS = [
 ]
 
 
-LOGIN_URL = '/login/'
+LOGIN_URL = 'login'
+
+AUTH_USER_MODEL = 'customer.Customer'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+EMAIL_HOST_USER = 'dinhgianhadat.cantho@gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_PASSWORD = 'rlmttomosffayhxb'
+
