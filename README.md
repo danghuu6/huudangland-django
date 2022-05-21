@@ -5,4 +5,4 @@
 - Dự án xây dựng một trang web nhầm giúp khách hàng định giá nhà đất tự động (Sử dụng Django)
 - Mô hình hồi quy áp dụng: Hồi quy tuyến tính (Linear Regression)
 
-<img src="[https://...](https://photos.google.com/u/2/album/AF1QipPXiu9sbW1cYB4AUZfXRLXQN30qtG0uomAR8Gj7/photo/AF1QipMTAnN-Qhok_RC18cXbVbaVvYfUsCZHCQMw5Etq)" alt="..." width="250" />
+![sodohuanluyen](https://user-images.githubusercontent.com/81134060/169634877-b633e742-cf46-440f-a01e-01c0e0ea8bab.png)
