@@ -1,4 +1,6 @@
 # Prediction_the_LandHouse_value
+- Logo <br>
+![HdangLand_xanhluc_final](https://user-images.githubusercontent.com/81134060/169635141-3673371e-831c-4705-bb20-8c5c7783d47d.png)
 
 
 # Dự án là một website viết bằng Python với Django Framework
