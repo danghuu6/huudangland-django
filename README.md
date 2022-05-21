@@ -4,3 +4,5 @@
 # Dự án đang trong quá trình hoàn thành, dự kiến giữa tháng 5
 - Dự án xây dựng một trang web nhầm giúp khách hàng định giá nhà đất tự động (Sử dụng Django)
 - Mô hình hồi quy áp dụng: Hồi quy tuyến tính (Linear Regression)
+
+![Smile](https://drive.google.com/file/d/1ZMNQF329HItGrSHk554NryzSj6Q_0q-R/view?usp=sharing)
