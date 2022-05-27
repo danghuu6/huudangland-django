@@ -10,6 +10,14 @@
     <link rel="icon" href="{% static 'homepage/img/logo-bds.png' %}" type="image/x-icon" >
     <link rel="stylesheet" href=" {% static 'homepage/css/form.css'%}">
     <link rel="stylesheet" href=" {% static 'homepage/fonts/themify-icons/themify-icons.css'%} ">
+    <style>
+        .mess {
+            color: red;
+            font-style: italic;
+            margin-left: 64px;
+
+        }
+    </style>
 </head>
 <body>
     <div id="main">
@@ -25,7 +33,7 @@
         <div class="modal-header">
             Đăng ký Thành viên
         </div>
-
+        <p class="mess">{{ mess }}</p>
         <form method="post" action="">
             {% csrf_token %}
             <div class="modal-body">

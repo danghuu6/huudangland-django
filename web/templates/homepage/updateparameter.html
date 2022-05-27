@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhập thông tin định giá</title>
+    <link rel="icon" href="{% static 'homepage/img/logo-bds.png' %}" type="image/x-icon" >
+    <link rel="stylesheet" href=" {% static 'homepage/css/formcustom.css'%}">
+    <link rel="stylesheet" href=" {% static 'homepage/css/form.css'%}">
+    <link rel="stylesheet" href=" {% static 'homepage/fonts/themify-icons/themify-icons.css'%} ">
+</head>
+<body>
+    <div id="main">
+        <div class="modal js-modal-login">
+            <a href="{% url 'admin-page' %}" class="back-page"><i class="ti-arrow-left"></i> Trở về</a>
+    <div class="modal-container1 js-modal-login-container">
+        <div class="modal-close js-modal-login-close">
+            <i class="ti-close"></i>
+        </div>
+
+        <div class="modal-header" style="font-size: 30px; color: #000">
+            Cập nhật mô hình sử dụng
+        </div>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="modal-body">
+            <div class="modal-item">
+
+                <label class="modal-label">
+                    Giá trị sử dụng: <span style="color: red">(*)</span>
+                </label>
+                <select id="lo" name="update-param-using"  class="modal-input" style="margin-right: 195px">
+                    {% if param_using.parameter_using == 1 %}
+                  <option value="1">1 (Mô hình sử dụng)</option>
+                    <option value="0">0 (Mô hình không sử dụng)</option>
+                    {% else %}
+                  <option value="0">0 (Mô hình không sử dụng)</option>
+                    <option value="1">1 (Mô hình sử dụng)</option>
+                    {% endif %}
+
+                </select>
+            </div>
+
+<!--                <div class="modal-item">-->
+
+<!--                <label for="image-predict" class="modal-label" >-->
+<!--                    Hình ảnh:-->
+<!--                </label>-->
+<!--                <input type="file" id="image-predict" class="modal-input" value="upload" name="image-predict" webkitdirectory multiple>-->
+<!--            </div>-->
+
+                <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+
+
+            <input type="hidden" name="predict-er" value="{{ user.name_customer }}"/>
+
+            <button type="submit" class="modal-btn" onclick="myFunction()">
+                Cập nhật
+            </button>
+    </div>
+        </form>
+
+
+
+    </div>
+</div>
+    </div>
+
+        <script>
+            var id = {{ p.id }}
+            function myFunction() {
+              confirm("Bạn có chắc muốn sửa sản phẩm id "+id);
+            }
+        </script>
+</body>
+</html>

@@ -22,12 +22,16 @@
             {% if user.is_staff %}
             <ul class="menu-list">
                 <a href="{% url 'manage-page' %}"><li>Quản lý dữ liệu</li></a>
-
-                
             </ul>
+            {% if user.is_admin %}
+            <ul class="menu-list">
+                <a href="{% url 'admin-page' %}"><li>Quản lý mo hinh</li></a>
+            </ul>
+            {% endif %}
+
             {% else %}
             <ul class="menu-list">
-                <a href="{% url 'index' %}"><li>Bạn có quyền xem thông tin</li></a>
+                <a href="{% url 'index' %}"><li>Bạn không có quyền xem thông tin</li></a>
 
 
             </ul>

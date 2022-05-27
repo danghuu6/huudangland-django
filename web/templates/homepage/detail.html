@@ -11,6 +11,15 @@
     <link rel="stylesheet" href=" {% static 'homepage/css/detail.css'%}">
     <link rel="stylesheet" href=" {% static 'homepage/css/modal.css' %}">
     <link rel="stylesheet" href=" {% static 'homepage/fonts/themify-icons/themify-icons.css'%} ">
+    <style>
+        #clickDelcmt {
+            color: blue;
+        }
+
+        #clickDelcmt:hover {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div id="main">
@@ -29,7 +38,7 @@
                         <li class="nav-items item-right-1"><i>Xin chào</i>, {{ user.name_customer }}</li>
                     </a>
 
-                    <a href="{% url 'logout' %}?next={{ request.path }}" class="text-decoration: none">
+                    <a onclick="logoutFunc()" id="clickLogout" class="text-decoration: none">
                         <li class="nav-items">Đăng xuất</li>
                     </a>
 
@@ -250,7 +259,7 @@
 
                                         <div class="comment-time">{{ cmt.time }}</div>
                                         <div class="history-content">{{ cmt.content }}</div>
-                                        <a href="{% url 'delcmt' %}?cmt-id={{ cmt.id }}&next={{ request.path }}" onclick="myFunction()">Xóa</a>
+                                        <a href="{% url 'delcmt' %}?cmt-id={{ cmt.id }}&next={{ request.path }}" id="clickDelcmt">Xóa</a>
                                     </div>
                                 </div>
                             </div>
@@ -293,10 +302,28 @@
           x[slideIndex-1].style.display = "block";
         }
 
-        function myFunction() {
-              confirm("Bạn muốn xóa bình luận này!");
+        function logoutFunc() {
+              var a = document.getElementById('clickLogout');
+                  let text = "Bạn muốn đăng xuất?";
+                  if (confirm(text) == true) {
+                    a.href = "{% url 'logout' %}?next={{ request.path }}";
+
+                  }
+         }
+
+
+    </script>
+    <script>
+        function deleteFB() {
+            var b = document.getElementById('clickDelcmt');
+            let text = "Bạn muốn xóa phản hồi này?";
+           if (confirm(text) == true) {
+                b.href = "{% url 'delcmt' %}?cmt-id={{ cmt.id }}&next={{ request.path }}";
+
+              } else {
+                b.href = "";
+              }
          }
     </script>
-
 </body>
 </html>

@@ -30,7 +30,7 @@
                         <li class="nav-items item-right-1"><i>Xin chào</i>, {{ user.name_customer }}</li>
                     </a>
 
-                    <a href="{% url 'logout' %}?next={{ request.path }}">
+                    <a onclick="myFunction()" id="clickLogout">
                         <li class="nav-items">Đăng xuất</li>
                     </a>
 
@@ -196,6 +196,16 @@
         <!--End Container-->
 
     </div>
+    <script>
+            function myFunction() {
+                  var a = document.getElementById('clickLogout');
+                  let text = "Bạn muốn đăng xuất?";
+                  if (confirm(text) == true) {
+                    a.href = "{% url 'logout' %}?next={{ request.path }}";
 
+                  }
+
+                }
+        </script>
 </body>
 </html>

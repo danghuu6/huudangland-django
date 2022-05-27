@@ -10,6 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 # Create your views here.
 
 
@@ -122,7 +123,7 @@ class HomeView(View):
                 else:
                     product_list = Product.objects.filter(price__range=[price_min, price_max])
         elif search_name is not None:
-            product_list = Product.objects.filter(title__icontains=search_name)
+            product_list = Product.objects.filter(Q(title__icontains=search_name) | Q(address__icontains=search_name))
         elif sort_filter:
             product_list = Product.objects.all().order_by(sort_filter)
         else:
@@ -251,6 +252,11 @@ class LoginView(View):
             context = {'redirect_to': redirect_to}
 
             return redirect(redirect_to)
+        elif my_user is None:
+            context = {
+                'message': 'Đăng nhập thất bại, vui lòng kiểm tra lại'
+            }
+            return render(request, 'homepage/login.html', context)
 
 
 
@@ -278,11 +284,25 @@ class RegisterCustomer(View):
         if gt == 4:
             gtdb = False
 
-        customer = Customer(phone_number=phone_number, name_customer=name, password=pass_word, date_of_birth=birthday, gt=gtdb)
+        cus_hist = Customer.object.filter(phone_number=phone_number)
+        if len(phone_number) == 10:
+            if cus_hist:
+                context = {
+                    'mess': 'Số điện thoại đã tồn tại'
+                }
+                return render(request, 'homepage/register.html', context)
+            else:
+                customer = Customer(phone_number=phone_number, name_customer=name, password=pass_word, date_of_birth=birthday, gt=gtdb)
 
-        customer.save()
+                customer.save()
 
-        return redirect('login')
+                return redirect('login')
+        else:
+            context = {
+                'mess': 'Số điện thoại phải có 10 số'
+            }
+            return render(request, 'homepage/register.html', context)
+
 
 
 class predictProduct(LoginRequiredMixin, View):
@@ -452,5 +472,56 @@ class updateData(View):
         Product.objects.filter(pk=product_id).update(title=title, price=int(price), area=float(area), address=address,
                                  location_house=int(location), floors=int(floors), to_center=float(to_center),
                                  image=img)
+
+        return redirect(next)
+
+
+class adminPage(View):
+    def get(self, request):
+        p = Parameter.objects.all().order_by('-parameter_using')
+
+        for i in p:
+            i.parameter_list = i.parameter_list.split(',')
+            list_y = i.time.strftime("%Y")
+            list_m = i.time.strftime("%m")
+            list_d = i.time.strftime("%d")
+            i.time = list_d + "/" + list_m + "/" + list_y
+
+        context = {
+            'param': p,
+            'len_p': p[0].parameter_list
+        }
+        return render(request, 'homepage/admin-page.html', context)
+
+class updateParameter(View):
+    def get(self, request, parameter_id):
+        param = Parameter.objects.get(pk=parameter_id)
+
+        context = {
+            'param_using': param
+        }
+        return render(request, 'homepage/updateparameter.html', context)
+
+    def post(self, request, parameter_id):
+        next = request.GET.get('next')
+
+        p_using = request.POST.get('update-param-using')
+
+        Parameter.objects.filter(pk=parameter_id).update(parameter_using=int(p_using))
+
+        return redirect(next)
+
+
+class createParameter(View):
+    def get(self, request):
+        return render(request, 'homepage/createparameter.html')
+
+    def post(self, request):
+        next = request.GET.get('next')
+        param_list = request.POST.get('create-param')
+        param_desc = request.POST.get('create-desc')
+
+        parameter = Parameter(parameter_list=param_list, parameter_descriptions=param_desc)
+        parameter.save()
 
         return redirect(next)

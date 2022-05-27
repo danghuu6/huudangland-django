@@ -1,0 +1,129 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'homepage/img/HdangLand_xanhluc_final.png' %}" type="image/x-icon" >
+    <link rel="stylesheet" href="{% static 'homepage/css/manage.css' %}">
+    <title>Quản lý dữ liệu - Định giá nhà đất</title>
+</head>
+<body>
+    <div class="main">
+        <div class="header">
+            <a href="/">
+                <div class="logo">
+                <img src="{% static 'homepage/img/HdangLand_xanhluc_final.png' %}" alt="">
+            </div>
+            </a>
+
+            {% if user.is_staff %}
+            <ul class="menu-list">
+                <a href="{% url 'manage-page' %}"><li>Quản lý dữ liệu</li></a>
+            </ul>
+            {% if user.is_admin %}
+            <ul class="menu-list">
+                <a href="{% url 'admin-page' %}"><li>Quản lý mo hinh</li></a>
+            </ul>
+            {% endif %}
+
+            {% else %}
+            <ul class="menu-list">
+                <a href="{% url 'index' %}"><li>Bạn không có quyền xem thông tin</li></a>
+
+
+            </ul>
+            {% endif %}
+
+
+        </div>
+
+        {% if user.is_admin %}
+        <div class="container">
+            <div class="content">
+<!--                <div class="filter-view">-->
+<!--                    <form action="{% url 'manage-page' %}" method="get">-->
+<!--                        {% csrf_token %}-->
+<!--                        <div class="content-filter">-->
+<!--                            <div class="filter-list">-->
+<!--                                <div class="filter-item">-->
+
+<!--                                    <select name="view-list" id="" class="filter-select">-->
+<!--                                        <option value="">&#45;&#45; Chế độ xem &#45;&#45;</option>-->
+<!--                                        <option value="product">Danh sách bất động sản</option>-->
+<!--                                        <option value="predict">Lịch sử dự đoán của khách hàng</option>-->
+<!--                                        <option value="customer">Danh sách thành viên</option>-->
+<!--                                        <option value="feedback">Danh sách phản hồi</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                                <input class="filter-btn" value="OK" type="submit" style="border: none">-->
+
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!--                </div>-->
+                <div class="nav-engine">
+                    <a href="{% url 'create-param' %}?next={{ request.path }}" class="js-login-click">Thêm bộ tham số</a>
+                </div>
+            <h2>Tham số của mô hình hồi quy</i></h2>
+                <div class="table-section">
+                    <table class="data-table">
+                        <tr>
+                            <th>id</th>
+
+<!--                            <th>a0</th>-->
+<!--                            <th>a1</th>-->
+<!--                            <th>a2</th>-->
+<!--                            <th>a3</th>-->
+<!--                            <th>a4</th>-->
+                            {% for i in len_p %}
+                            <th></th>
+                            {% endfor %}
+                            <th>Mô tả</th>
+                            <th>Thời gian thêm</th>
+                            <th>Sử dụng</th>
+                            <th></th>
+
+
+                          </tr>
+                        {% for p in param %}
+                          <tr>
+                            <td>{{ p.id }}</td>
+                              {% for pp in p.parameter_list %}
+                              <td>{{ pp }}</td>
+                              {% endfor %}
+                              <td>{{ p.parameter_descriptions }}</td>
+                              <td>{{ p.time }}</td>
+                              <td>{{ p.parameter_using }}</td>
+                              <td>
+                                <a href="{% url 'update-param' p.id %}?next={{ request.path }}">Cập nhật</a>
+
+                            </td>
+                          </tr>
+                        {% endfor %}
+
+
+                    </table>
+                </div>
+
+
+
+
+
+        </div>
+
+        {% endif %}
+    </div>
+
+
+        <script>
+            function myFunction() {
+
+              confirm("Bạn muốn xóa sản phẩm này!");
+            }
+        </script>
+  
+</body>
+</html>

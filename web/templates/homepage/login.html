@@ -10,6 +10,14 @@
     <link rel="icon" href="{% static 'homepage/img/logo-bds.png' %}" type="image/x-icon" >
     <link rel="stylesheet" href=" {% static 'homepage/css/form.css'%}">
     <link rel="stylesheet" href=" {% static 'homepage/fonts/themify-icons/themify-icons.css'%} ">
+    <style>
+        .mess {
+            color: red;
+            font-style: italic;
+            margin-left: 64px;
+
+        }
+    </style>
 </head>
 <body>
     <div id="main">
@@ -24,7 +32,7 @@
         <div class="modal-header">
             Đăng nhập
         </div>
-
+        <p class="mess">{{ message }}</p>
         <form action="" method="post">
             {% csrf_token %}
             <div class="modal-body">
@@ -33,7 +41,7 @@
                 <label for="modal-signin-phone" class="modal-label">
                     Số điện thoại:
                 </label>
-                <input type="text" id="modal-signin-phone" class="modal-input" placeholder="Số điện thoại" name="username">
+                <input type="text" id="modal-signin-phone" class="modal-input" placeholder="Số điện thoại" name="username" required>
 
             </div>
 
@@ -42,7 +50,7 @@
                 <label for="modal-signin-password" class="modal-label">
                     Mật khẩu:
                 </label>
-                <input type="password" id="modal-signin-password" class="modal-input" placeholder="Mật khẩu" name="password">
+                <input type="password" id="modal-signin-password" class="modal-input" placeholder="Mật khẩu" name="password" required>
             </div>
 
                 {% if request.GET.next == '/register/'%}
@@ -67,5 +75,28 @@
     </div>
 </div>
     </div>
+
+<script>
+		function test_login() {
+			var ten = document.getElementById("modal-signin-phone").value;
+			var mk = document.getElementById("modal-signin-password").value;
+			var status = true;
+			if (ten == "") {
+				document.getElementById("tentb").innerHTML = "Tên không được bỏ trống";
+				status = false;
+			} else {
+				document.getElementById("tentb").innerHTML = "";
+				status = true;
+			}
+			if (mk == "") {
+				document.getElementById("mktb").innerHTML = "Mật khẩu không được bỏ trống";
+				status = false;
+			} else {
+				document.getElementById("mktb").innerHTML = "";
+				status = true;
+			}
+			return status;
+		}
+	</script>
 </body>
 </html>
